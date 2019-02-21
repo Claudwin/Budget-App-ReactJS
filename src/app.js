@@ -28,15 +28,21 @@ function getLocation(location) {
         return <p>Location: {location}</p>
     }
 }
-const template2 = (
+
+let count = 0;
+const addOne = () => console.log('addOne');
+const minusOne = () => console.log('minusOne');
+const reset = () => console.log('reset');
+const template2 = ( 
     <div>
-        <h1>{user.name ? user.name : 'Annoymous'}</h1>
-        {(user.age && user.age) >= 18 && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
+        <h1> Count: {count}</h1>
+        <button onClick={addOne}>+1</button><br/>
+        <button onClick={minusOne}>-1</button><br/>
+        <button onClick={reset}>reset</button>
     </div>
 );
-
+console.log(template2);
 const appRoot = document.getElementById('app');
 
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(template2, appRoot);
