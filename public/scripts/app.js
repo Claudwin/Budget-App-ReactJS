@@ -47,42 +47,49 @@ function getLocation(location) {
 
 var count = 0;
 var addOne = function addOne() {
-    return console.log('addOne');
+    count++;
+    renderCounterApp();
 };
 var minusOne = function minusOne() {
-    return console.log('minusOne');
+    count--;
+    renderCounterApp();
 };
 var reset = function reset() {
-    return console.log('reset');
+    count = 0;
+    renderCounterApp();
 };
-var template2 = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        ' Count: ',
-        count
-    ),
-    React.createElement(
-        'button',
-        { onClick: addOne },
-        '+1'
-    ),
-    React.createElement('br', null),
-    React.createElement(
-        'button',
-        { onClick: minusOne },
-        '-1'
-    ),
-    React.createElement('br', null),
-    React.createElement(
-        'button',
-        { onClick: reset },
-        'reset'
-    )
-);
-console.log(template2);
+
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template2, appRoot);
+var renderCounterApp = function renderCounterApp() {
+    var template2 = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            ' Count: ',
+            count
+        ),
+        React.createElement(
+            'button',
+            { onClick: addOne },
+            '+1'
+        ),
+        React.createElement('br', null),
+        React.createElement(
+            'button',
+            { onClick: minusOne },
+            '-1'
+        ),
+        React.createElement('br', null),
+        React.createElement(
+            'button',
+            { onClick: reset },
+            'reset'
+        )
+    );
+    ReactDOM.render(template2, appRoot);
+};
+
+renderCounterApp();

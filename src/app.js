@@ -30,10 +30,23 @@ function getLocation(location) {
 }
 
 let count = 0;
-const addOne = () => console.log('addOne');
-const minusOne = () => console.log('minusOne');
-const reset = () => console.log('reset');
-const template2 = ( 
+const addOne = () => {
+    count++; 
+    renderCounterApp();
+};
+const minusOne = () => {
+    count--;
+    renderCounterApp();
+};
+const reset = () => {
+    count = 0;
+    renderCounterApp();
+};
+
+const appRoot = document.getElementById('app');
+
+const renderCounterApp = () => {
+ const template2 = ( 
     <div>
         <h1> Count: {count}</h1>
         <button onClick={addOne}>+1</button><br/>
@@ -41,8 +54,7 @@ const template2 = (
         <button onClick={reset}>reset</button>
     </div>
 );
-console.log(template2);
-const appRoot = document.getElementById('app');
+ ReactDOM.render(template2, appRoot);
+};
 
-
-ReactDOM.render(template2, appRoot);
+renderCounterApp();
