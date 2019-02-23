@@ -47,6 +47,7 @@ const template = (
         </form>
     </div>
 );
+
 ReactDOM.render(template, appRoot);
 };
 
