@@ -3,6 +3,12 @@ import Option from './Option';
 
 const Options = (props) => (
         <div>
+          <button 
+          className="button--link"
+          onClick={props.handleDeleteOptions}
+          >
+          Remove All
+          </button>
             {props.options.map((option) => (
               <Option 
                 key={option} 
@@ -11,7 +17,7 @@ const Options = (props) => (
               />
               ))
             }
-            <button onClick={props.handleDeleteOptions}>Remove All</button>
+            
         </div>
     )
 
