@@ -1,38 +1,93 @@
-import {createStore, combineReducers} from 'redux';
+import { createStore, combineReducers } from 'redux';
+import uuid from 'uuid';
+
+// ADD_EXPENSE
+const addExpense = (
+  {
+    description = '',
+    note = '',
+    amount = 0,
+    createdAt = 0
+  } = {}
+) => ({
+  type: 'ADD_EXPENSE',
+  expense: {
+    id: uuid(),
+    description,
+    note,
+    amount,
+    createdAt
+  }
+});
+
+// REMOVE_EXPENSE
+const removeExpense = ({ id } = {}) => ({
+  type: 'REMOVE_EXPENSE',
+  id
+});
+
+// EDIT_EXPENSE
+// SET_TEXT_FILTER
+// SORT_BY_DATE
+// SORT_BY_AMOUNT
+// SET_START_DATE
+// SET_END_DATE
+
+// Expenses Reducer
 
 const expensesReducerDefaultState = [];
 
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
-    default: 
+    case 'ADD_EXPENSE':
+      return [
+        ...state,
+        action.expense
+      ];
+    case 'REMOVE_EXPENSE':
+      return state.filter(({ id }) => id !== action.id);
+    default:
       return state;
   }
 };
 
-const filtersReuducerDefaultState = {
+// Filters Reducer
+
+const filtersReducerDefaultState = {
   text: '',
   sortBy: 'date',
   startDate: undefined,
   endDate: undefined
-}
+};
 
-const filtersReuducer = (state = filtersReuducerDefaultState, action) => {
+const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
     default:
-      return state;  }
-}
+      return state;
+  }
+};
+
+// Store creation
+
 const store = createStore(
   combineReducers({
     expenses: expensesReducer,
-    filters: filtersReuducer
+    filters: filtersReducer
   })
 );
 
-console.log(store.getState());
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+const expenseOne = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expenseTwo = store.dispatch(addExpense({ description: 'Coffee', amount: 300 }));
+
+store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
 const demoState = {
   expenses: [{
-    id: 'jbvjnjsnjsd',
+    id: 'poijasdfhwer',
     description: 'January Rent',
     note: 'This was the final payment for that address',
     amount: 54500,
@@ -40,8 +95,9 @@ const demoState = {
   }],
   filters: {
     text: 'rent',
-    sortBy: 'amount', //Date or amount
+    sortBy: 'amount', // date or amount
     startDate: undefined,
     endDate: undefined
   }
 };
+
