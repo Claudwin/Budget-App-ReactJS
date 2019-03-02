@@ -16,4 +16,6 @@ console.log(`It's ${temperature} in ${city}`)
 
 const address = ['123', 'NYC', 'NY', '11433']
 
-const []
+const [houseNumber, city, state = 'New York', zip] = address;
+
+console.log(`${houseNumber} in ${city}`)
