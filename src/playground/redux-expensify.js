@@ -17,7 +17,7 @@ const addExpense = (
     note,
     amount,
     createdAt
-  }
+  } 
 });
 
 // REMOVE_EXPENSE
